@@ -1,9 +1,11 @@
-from urllib.request import urlopen
+import requests
+
 import re
 
 from bs4 import BeautifulSoup
 
-get_parsed_html = lambda url: BeautifulSoup(urlopen(url), 'html.parser')
+# we use html5lib since other parsers will randomly cut off part of the text
+get_parsed_html = lambda url: BeautifulSoup(requests.get(url).content, 'html5lib')
 
 search_between = lambda target, start, end: re.search('{0}(.*){1}'.format(start, end), target).group(1)
 

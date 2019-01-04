@@ -1,4 +1,4 @@
-from scraper_utils import get_parsed_html, parse_options, search_between, clean_str, simplify_names
+from .scraper_utils import get_parsed_html, parse_options, search_between, clean_str, simplify_names
 
 # scrape all possible origin schools from the dropdown
 def scrape_origin_schools():
@@ -17,7 +17,7 @@ def scrape_origin_schools():
 # transfer paths may not have up-to-date articulation agreements and might fall back
 # to an older version. See 'determine_max_year_range' for more info
 def scrape_year_ranges(origin_school):
-    DEST_PAGE = 'http://web2.assist.org/web-assist/{0}.html'.format(origin_school)
+    DEST_PAGE = f'http://web2.assist.org/web-assist/{origin_school}.html'
     html = get_parsed_html(DEST_PAGE)
 
     year_ranges = []
@@ -27,7 +27,7 @@ def scrape_year_ranges(origin_school):
     return year_ranges
 
 def scrape_dest_schools(origin_school, year_range):
-    DEST_PAGE = 'http://web2.assist.org/web-assist/prompt.do?ia={0}&ay={1}'.format(origin_school, year_range)
+    DEST_PAGE = f'http://web2.assist.org/web-assist/prompt.do?ia={origin_school}&ay={year_range}'
     html = get_parsed_html(DEST_PAGE)
 
     dest_schools = []
@@ -44,7 +44,7 @@ def scrape_dest_schools(origin_school, year_range):
     return dest_schools
 
 def determine_max_year_range(origin_school, year_range, dest_school):
-    FINAL_CONFIG_PAGE = 'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={0}&ay={1}&oia={2}&dir=1'.format(origin_school, year_range, dest_school)
+    FINAL_CONFIG_PAGE = f'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={origin_school}&ay={year_range}&oia={dest_school}&dir=1'
     html = get_parsed_html(FINAL_CONFIG_PAGE)
 
     year_range_warning = clean_str(html.find('div', class_ = 'aynote').text)
@@ -56,7 +56,7 @@ def determine_max_year_range(origin_school, year_range, dest_school):
     return max_year_range
 
 def scrape_dest_school_majors(origin_school, year_range, dest_school):
-    FINAL_CONFIG_PAGE = 'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={0}&ay={1}&oia={2}&dir=1'.format(origin_school, year_range, dest_school)
+    FINAL_CONFIG_PAGE = f'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={origin_school}&ay={year_range}&oia={dest_school}&dir=1'
     html = get_parsed_html(FINAL_CONFIG_PAGE)
 
     dest_school_majors = []
@@ -67,7 +67,7 @@ def scrape_dest_school_majors(origin_school, year_range, dest_school):
     return dest_school_majors
 
 def scrape_dest_school_depts(origin_school, year_range, dest_school):
-    FINAL_CONFIG_PAGE = 'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={0}&ay={1}&oia={2}&dir=1'.format(origin_school, year_range, dest_school)
+    FINAL_CONFIG_PAGE = f'http://web2.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia={origin_school}&ay={year_range}&oia={dest_school}&dir=1'
     html = get_parsed_html(FINAL_CONFIG_PAGE)
 
     dest_school_depts = []
