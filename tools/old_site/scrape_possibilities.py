@@ -86,18 +86,8 @@ def scrape_dest_school_depts(origin_school, year_range, dest_school):
     return { 'origin': origin_school_depts, 'destination': dest_school_depts }
 
 def scrape_course_articulation_possibilites():
-    major_count = 0
-    dept_count = 0
-    dest_schools = scrape_dest_schools('DIABLO', '16-17')
-    for dest in dest_schools:
-        print(dest)
-        majors = scrape_dest_school_majors('DIABLO', '16-17', dest['id'])
-        depts = scrape_dest_school_depts('DIABLO', '16-17', dest['id'])
-
-        major_count += len(majors)
-        dept_count += len(depts['origin']) + len(depts['destination'])
-
-    final_res = (major_count, dept_count)
+    print(len(scrape_origin_schools()))
+    print(len(scrape_year_ranges('DIABLO')))
 
     # final_res = scrape_year_ranges('DIABLO')
     # final_res = scrape_dest_schools('DIABLO', '16-17')
@@ -107,7 +97,7 @@ def scrape_course_articulation_possibilites():
     # final_res = scrape_dest_school_depts('DIABLO', '16-17', 'UCB')
     # final_res = scrape_dest_school_majors('ALAMEDA', '16-17', 'UCSFP')
     # final_res = scrape_dest_school_depts('ALAMEDA', '16-17', 'UCSFP')
-    print(final_res)
+    # print(final_res)
     pass
 
 if __name__ == '__main__':

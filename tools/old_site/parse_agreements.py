@@ -28,7 +28,8 @@ def split_agreement_by_blocks(raw_txt):
 
     return blocks
 
-# since each valid block has an equal number of bars and newlines, we can split the block with both delimiters and
+# since each valid block has an equal number of bars and newlines, we can split the block with both delimiters
+# and pair the even-indexed parts together as well as the odd-indexed parts
 def split_block_by_side(block):
     block_parts = re.split('[|\n]', block)
     print(block_parts)
@@ -60,22 +61,24 @@ def append_missing_spaces(raw_txt):
     return '\n'.join(fixed_lines)
 
 
-def parse_major_agreement():
+def parse_major_agreement(agreement_text):
+    space_filled = append_missing_spaces(txt)
+    blocks = split_agreement_by_blocks(space_filled)
+    finalized_blocks = split_all_course_blocks_by_side(blocks)
+    # print(count_chars_for_lines(space_filled))
+    # [ezprint(block) for block in split_all_course_blocks_by_side(blocks)]
+    # split_all_course_blocks_by_side(blocks)
+    return finalized_blocks
+
+if __name__ == "__main__":
     # txt = scrape_articulation_by_major('DIABLO', '16-17', 'UCB', 'EECS')
     # txt = scrape_articulation_by_major('DIABLO', '16-17', 'CSUC', 'ENGMT')
     txt = scrape_articulation_by_major('SDSU', '16-17', 'CSULA', 'CE')
+
     from time import time
     start = time()
 
-    space_filled = append_missing_spaces(txt)
-    blocks = split_agreement_by_blocks(space_filled)
-    # print(count_chars_for_lines(space_filled))
-    [ezprint(block) for block in split_all_course_blocks_by_side(blocks)]
-    # split_all_course_blocks_by_side(blocks)
+    parse_major_agreement()
 
     end = time()
-
     print((end - start) * 1000, 'ms')
-
-if __name__ == "__main__":
-    parse_major_agreement()
