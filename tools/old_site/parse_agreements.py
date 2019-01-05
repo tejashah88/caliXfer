@@ -1,13 +1,8 @@
 import re
 from pprint import PrettyPrinter
-
 ezprint = PrettyPrinter(indent=4).pprint
 
-import numpy as np
-
 from .scrape_content import scrape_articulation_by_major
-
-from contexttimer import Timer
 
 def count_chars_for_lines(raw_txt):
     return [len(line) for line in raw_txt.splitlines()]
@@ -15,14 +10,14 @@ def count_chars_for_lines(raw_txt):
 def split_agreement_by_blocks(raw_txt):
     lines = raw_txt.splitlines()
     num_dashes = [line.count('-') for line in lines]
-    mean_dashes = np.mean(num_dashes)
+    mean_dashes = sum(num_dashes) / len(num_dashes)
 
     blocks = []
-    buffer = ""
+    buffer = ''
     for line in lines:
         if line.count('-') >= mean_dashes:
             blocks += [buffer]
-            buffer = ""
+            buffer = ''
         else:
             buffer += line + '\n'
 
@@ -35,13 +30,13 @@ def split_block_by_side(block):
     print(block_parts)
     origin_block = '\n'.join(block_parts[::2])
     dest_block = '\n'.join(block_parts[1::2])
-    print(">>> ORIGIN BLOCK")
+    print('>>> ORIGIN BLOCK')
     print(origin_block)
-    print(">>> END ORIGIN BLOCK")
+    print('>>> END ORIGIN BLOCK')
     print()
-    print(">>> DEST BLOCK")
+    print('>>> DEST BLOCK')
     print(dest_block)
-    print(">>> END DEST BLOCK")
+    print('>>> END DEST BLOCK')
     print()
     return [origin_block, dest_block]
 
@@ -62,7 +57,7 @@ def append_missing_spaces(raw_txt):
 
 
 def parse_major_agreement(agreement_text):
-    space_filled = append_missing_spaces(txt)
+    space_filled = append_missing_spaces(agreement_text)
     blocks = split_agreement_by_blocks(space_filled)
     finalized_blocks = split_all_course_blocks_by_side(blocks)
     # print(count_chars_for_lines(space_filled))
@@ -70,15 +65,17 @@ def parse_major_agreement(agreement_text):
     # split_all_course_blocks_by_side(blocks)
     return finalized_blocks
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # txt = scrape_articulation_by_major('DIABLO', '16-17', 'UCB', 'EECS')
     # txt = scrape_articulation_by_major('DIABLO', '16-17', 'CSUC', 'ENGMT')
-    txt = scrape_articulation_by_major('SDSU', '16-17', 'CSULA', 'CE')
+    # txt = scrape_articulation_by_major('SDSU', '16-17', 'CSULA', 'CE')
 
-    from time import time
-    start = time()
+    with open('./data/dump-dvc-info/agreements/UCB/EECS.txt', 'r') as file:
+        from time import time
+        start = time()
 
-    parse_major_agreement()
+        content = file.read()
+        parse_major_agreement(content)
 
-    end = time()
-    print((end - start) * 1000, 'ms')
+        end = time()
+        print((end - start) * 1000, 'ms')

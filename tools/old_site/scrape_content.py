@@ -20,7 +20,7 @@ def scrape_articulation_by_dest_dept(origin_school, year_range, dest_school, des
     TARGET_URL = f'http://web2.assist.org/cgi-bin/REPORT_2/Rep2.pl?agreement=aa&event=18&ia={origin_school}&oia={dest_school}&ay={year_range}&aay={year_range}&dora={dest_dept}&sia={origin_school}&ria={dest_school}&sidebar=false&rinst=right&mver=2&kind=5&dt=2&dir=1&swap=1'
     return get_text(TARGET_URL)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     final_res = scrape_articulation_by_major('DIABLO', '16-17', 'UCB', 'EECS')
     # final_res = scrape_articulation_by_origin_dept('DIABLO', '16-17', 'UCB', 'COMSC')
     # final_res = scrape_articulation_by_dest_dept('DIABLO', '16-17', 'UCB', 'COMPSCI')

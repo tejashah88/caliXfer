@@ -9,7 +9,7 @@ def scrape_origin_schools():
     for (txt, val) in parse_options(html, 'option'):
         origin_schools.append({
             'name': simplify_names(txt),
-            'id': val.split(".")[0]
+            'id': val.split('.')[0]
         })
     return origin_schools
 
@@ -32,7 +32,7 @@ def scrape_dest_schools(origin_school, year_range):
 
     dest_schools = []
     for (txt, val) in parse_options(html, 'select[name="oia"] option'):
-        (dest_type, dest_name) = txt.split(":")
+        (dest_type, dest_name) = txt.split(':')
         if dest_type.strip().lower() == 'from':
             continue
 
