@@ -144,4 +144,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
+# don't commit scraped data
 data/

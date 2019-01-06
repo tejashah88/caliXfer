@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Home",
+    "abbr-title": "Home",
+    "id": "home",
+    "icon": "home",
+    "link": "/",
+    "filename": "Home"
+  },
+  {
+    "title": "About",
+    "abbr-title": "About",
+    "id": "about",
+    "icon": "info",
+    "link": "/about",
+    "filename": "About"
+  },
+  {
+    "title": "Course Requirements",
+    "abbr-title": "Course Req.",
+    "id": "course-req",
+    "icon": "assignment",
+    "link": "/course-reqs",
+    "filename": "ViewCourseReqs"
+  },
+  {
+    "title": "Explore Majors",
+    "abbr-title": "Majors",
+    "id": "explore-major",
+    "icon": "search",
+    "link": "/explore-majors",
+    "filename": "ExploreMajors"
+  },
+  {
+    "title": "Explore Universities",
+    "abbr-title": "Universities",
+    "id": "explore-uni",
+    "icon": "school",
+    "link": "/explore-universities",
+    "filename": "ExploreUnis"
+  }
+]

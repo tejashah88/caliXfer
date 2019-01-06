@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "fuse.js": "^3.3.0",
     "vue": "^2.5.21",
+    "vue-material-design-icons": "^2.6.0",
+    "vue-router": "^3.0.1",
+    "vue2-transitions": "^0.2.3",
     "vuetify": "^1.3.0"
   },
   "devDependencies": {
@@ -26,55 +30,6 @@
     "vue-gh-pages": "^1.19.0",
     "vue-template-compiler": "^2.5.21",
     "vuetify-loader": "^1.0.5"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {
-      "require-await": "error",
-      "indent": [
-        "error",
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
-      "quotes": [
-        "error",
-        "single",
-        {
-          "avoidEscape": true,
-          "allowTemplateLiterals": true
-        }
-      ],
-      "semi": [
-        "error",
-        "always"
-      ],
-      "no-console": "off",
-      "no-unused-vars": "warn",
-      "prefer-const": [
-        "warn",
-        {
-          "destructuring": "any",
-          "ignoreReadBeforeAssign": false
-        }
-      ],
-      "strict": [
-        "error",
-        "global"
-      ],
-      "no-var": "error"
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {
