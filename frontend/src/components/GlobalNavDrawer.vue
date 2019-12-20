@@ -5,18 +5,18 @@
     fixed
     v-model="isOpen">
     <v-list>
-      <v-list-tile
+      <v-list-item
         v-for="route in routes"
         :key="route.id"
         @click.stop="$router.push(route.link); $emit('close-drawer-req');">
-        <v-list-tile-action>
+        <v-list-item-action>
           <v-icon>{{ route.icon }}</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>{{ route.title }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>{{ route.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

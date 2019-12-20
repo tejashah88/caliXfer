@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar app dark color="deep-purple accent-2">
-    <v-toolbar-side-icon @click="$emit('close-drawer-req')"></v-toolbar-side-icon>
+  <v-app-bar app dark color="deep-purple accent-2">
+    <v-app-bar-nav-icon @click="$emit('close-drawer-req')"></v-app-bar-nav-icon>
 
     <v-toolbar-title class="headline">
       <span class="font-weight-bold">CaliXfer</span>
@@ -12,7 +12,7 @@
       <v-btn
         v-for="route in routes"
         :key="route.id"
-        flat
+        text
         @click="$router.push(route.link)">
         {{ route['abbr-title'] }}
       </v-btn>
@@ -27,7 +27,7 @@
         <github-circle-icon class="icon-2x"/>
       </v-btn>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <style>
