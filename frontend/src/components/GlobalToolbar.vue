@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app dark color="deep-purple accent-2">
-    <v-app-bar-nav-icon @click="$emit('close-drawer-req')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="$emit('toggle-drawer')"></v-app-bar-nav-icon>
 
     <v-toolbar-title class="headline">
       <span class="font-weight-bold">CaliXfer</span>
@@ -13,7 +13,7 @@
         v-for="route in routes"
         :key="route.id"
         text
-        @click="$router.push(route.link)">
+        @click="$router.push(route.link).catch(err => {})">
         {{ route['abbr-title'] }}
       </v-btn>
     </v-toolbar-items>

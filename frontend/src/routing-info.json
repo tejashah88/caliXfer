@@ -5,7 +5,8 @@
     "id": "home",
     "icon": "home",
     "link": "/",
-    "filename": "Home"
+    "filename": "Home",
+    "description": "The home page of CaliXfer"
   },
   {
     "title": "About",
@@ -13,7 +14,8 @@
     "id": "about",
     "icon": "info",
     "link": "/about",
-    "filename": "About"
+    "filename": "About",
+    "description": "The about page of CaliXfer"
   },
   {
     "title": "Course Requirements",
@@ -21,7 +23,8 @@
     "id": "course-req",
     "icon": "assignment",
     "link": "/course-reqs",
-    "filename": "ViewCourseReqs"
+    "filename": "ViewCourseReqs",
+    "description": "View your course requirements"
   },
   {
     "title": "Explore Majors",
@@ -29,7 +32,8 @@
     "id": "explore-major",
     "icon": "search",
     "link": "/explore-majors",
-    "filename": "ExploreMajors"
+    "filename": "ExploreMajors",
+    "description": "Explore different majors"
   },
   {
     "title": "Explore Universities",
@@ -37,6 +41,7 @@
     "id": "explore-uni",
     "icon": "school",
     "link": "/explore-universities",
-    "filename": "ExploreUnis"
+    "filename": "ExploreUnis",
+    "description": "Explore different universities"
   }
 ]

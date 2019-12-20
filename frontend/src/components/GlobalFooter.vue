@@ -1,8 +1,8 @@
 <template>
   <v-footer app height="auto" dark color="deep-purple darken-1">
-    <v-layout justify-center row wrap>
+    <v-row justify-center row wrap>
       Made with <vuejs-icon class="icon-breath-room"/> and <language-python-icon class="icon-breath-room"/> by Tejas Shah (<a href="https://github.com/tejashah88" class="white--text" target="_blank">tejashah88</a>)
-    </v-layout>
+    </v-row>
   </v-footer>
 </template>
 

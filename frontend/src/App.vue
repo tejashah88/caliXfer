@@ -1,12 +1,14 @@
 <template>
   <v-app>
-    <global-toolbar @side-button-click="isDrawerOpen = !isDrawerOpen"></global-toolbar>
-    <global-nav-drawer :isOpen="isDrawerOpen"></global-nav-drawer>
+    <global-toolbar @toggle-drawer="isDrawerOpen = !isDrawerOpen"></global-toolbar>
+    <global-nav-drawer @close-drawer="isDrawerOpen = false" :isOpen="isDrawerOpen"></global-nav-drawer>
 
     <v-content>
       <v-container fluid>
       <fade-transition :duration="200" mode="out-in">
-        <router-view></router-view>
+        <v-container pa-4>
+          <router-view></router-view>
+        </v-container>
       </fade-transition>
       </v-container>
     </v-content>
@@ -31,7 +33,15 @@ export default {
     GlobalFooter
   },
   data: () => ({
-    isDrawerOpen: true
-  })
+    isDrawerOpen: false
+  }),
+  watch: {
+    '$route':{
+      handler: (to, from) => {
+        document.title = to.meta.title || 'CaliXfer';
+      },
+      immediate: true
+    }
+  },
 };
 </script>

@@ -2,13 +2,13 @@
   <v-navigation-drawer
     app
     stateless
-    fixed
+    temporary
     v-model="isOpen">
     <v-list>
       <v-list-item
         v-for="route in routes"
         :key="route.id"
-        @click.stop="$router.push(route.link); $emit('close-drawer-req');">
+        @click.stop="$router.push(route.link).catch(err => {}); $emit('close-drawer');">
         <v-list-item-action>
           <v-icon>{{ route.icon }}</v-icon>
         </v-list-item-action>
