@@ -146,3 +146,4 @@ yarn-error.log*
 
 # don't commit scraped data
 data/
+json-dump/
