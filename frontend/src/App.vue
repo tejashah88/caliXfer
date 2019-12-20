@@ -1,6 +1,6 @@
 <template>
-  <v-app :dark="darkMode">
-    <global-toolbar @toggle-dark-mode="darkMode = !darkMode" @side-button-click="isDrawerOpen = !isDrawerOpen"></global-toolbar>
+  <v-app>
+    <global-toolbar @side-button-click="isDrawerOpen = !isDrawerOpen"></global-toolbar>
     <global-nav-drawer :isOpen="isDrawerOpen"></global-nav-drawer>
 
     <v-content>
@@ -31,7 +31,6 @@ export default {
     GlobalFooter
   },
   data: () => ({
-    darkMode: false,
     isDrawerOpen: true
   })
 };

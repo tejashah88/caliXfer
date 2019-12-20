@@ -19,10 +19,6 @@
     </v-toolbar-items>
 
     <v-toolbar-items>
-      <v-btn large icon @click="$emit('toggle-dark-mode')">
-        <lightbulb-icon class="icon-2x"/>
-      </v-btn>
-
       <v-btn large icon href="https://github.com/tejashah88/caliXfer" target="_blank">
         <github-circle-icon class="icon-2x"/>
       </v-btn>
@@ -45,13 +41,11 @@
 <script>
 const routingInfo = require('@/routing-info.json');
 
-import LightbulbIcon from 'vue-material-design-icons/Lightbulb';
 import GithubCircleIcon from 'vue-material-design-icons/GithubCircle';
 
 export default {
   name: 'GlobalToolbar',
   components: {
-    LightbulbIcon,
     GithubCircleIcon
   },
   data: () => ({
