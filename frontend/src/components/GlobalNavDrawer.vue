@@ -8,7 +8,7 @@
       <v-list-tile
         v-for="route in routes"
         :key="route.id"
-        @click.stop="$router.push(route.link)">
+        @click.stop="$router.push(route.link); $emit('close-drawer-req');">
         <v-list-tile-action>
           <v-icon>{{ route.icon }}</v-icon>
         </v-list-tile-action>

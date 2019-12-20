@@ -41,8 +41,7 @@
       "error",
       "global"
     ],
-    "no-var": "error",
-    "eol-last": ["error", "never"]
+    "no-var": "error"
   },
   "parserOptions": {
     "parser": "babel-eslint"
