@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <global-toolbar @toggle-drawer="isDrawerOpen = !isDrawerOpen"></global-toolbar>
-    <global-nav-drawer @close-drawer="isDrawerOpen = false" :isOpen="isDrawerOpen"></global-nav-drawer>
+    <global-nav-drawer @close-drawer="isDrawerOpen = false" :drawerOpen.sync="isDrawerOpen"></global-nav-drawer>
 
     <v-content>
       <v-container fluid>

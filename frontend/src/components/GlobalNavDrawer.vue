@@ -1,8 +1,8 @@
 <template>
   <v-navigation-drawer
     app
-    stateless
     temporary
+    width="320"
     v-model="isOpen">
     <v-list>
       <v-list-item
@@ -27,10 +27,20 @@ const routingInfo = require('@/routing-info.json');
 export default {
   name: 'GlobalNavDrawer',
   props: {
-    isOpen: Boolean,
+    drawerOpen: Boolean,
   },
   data: () => ({
     routes: routingInfo
-  })
+  }),
+  computed: {
+    isOpen: {
+      get() {
+        return this.drawerOpen;
+      },
+      set(value) {
+        this.$emit('update:drawerOpen', value);
+      },
+    },
+  },
 };
 </script>
