@@ -18,18 +18,18 @@
     "description": "The about page of CaliXfer"
   },
   {
-    "title": "Course Requirements",
-    "abbr-title": "Course Req.",
-    "id": "course-req",
+    "title": "View Transfer Requirements",
+    "abbr-title": "Transfer Req.",
+    "id": "transfer-reqs",
     "icon": "assignment",
-    "link": "/course-reqs",
-    "filename": "ViewCourseReqs",
-    "description": "View your course requirements"
+    "link": "/transfer-reqs",
+    "filename": "ViewTransferReqs",
+    "description": "View your transfer requirements"
   },
   {
     "title": "Explore Majors",
     "abbr-title": "Majors",
-    "id": "explore-major",
+    "id": "explore-majors",
     "icon": "search",
     "link": "/explore-majors",
     "filename": "ExploreMajors",
@@ -38,7 +38,7 @@
   {
     "title": "Explore Universities",
     "abbr-title": "Universities",
-    "id": "explore-uni",
+    "id": "explore-unis",
     "icon": "school",
     "link": "/explore-universities",
     "filename": "ExploreUnis",
