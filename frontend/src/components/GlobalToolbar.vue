@@ -6,6 +6,12 @@
       <span class="font-weight-bold">CaliXfer</span>
     </v-toolbar-title>
 
+    <v-toolbar-items>
+      <v-btn large icon href="https://github.com/tejashah88/caliXfer" target="_blank">
+        <github-circle-icon class="icon-2x"/>
+      </v-btn>
+    </v-toolbar-items>
+
     <v-spacer></v-spacer>
 
     <v-toolbar-items class="hidden-xs-only">
@@ -15,12 +21,6 @@
         text
         @click="$router.push(route.link).catch(err => {})">
         {{ route['abbr-title'] }}
-      </v-btn>
-    </v-toolbar-items>
-
-    <v-toolbar-items>
-      <v-btn large icon href="https://github.com/tejashah88/caliXfer" target="_blank">
-        <github-circle-icon class="icon-2x"/>
       </v-btn>
     </v-toolbar-items>
   </v-app-bar>
