@@ -1,27 +1,47 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout justify-center align-center column pa-4>
-      <div class="display-3 font-weight-black text-xs-center mb-3">ABOUT CALIXFER</div>
-      <div class="headline text-xs-left">
-        caliXfer is a web app that enhances some of assist.org's capabilities in an exploratory fashion. In addition to improving on some of the annoyances of assist.org, it let's you explore different major/university programs by comparing the differences in the course requirement agreements using easy-to-understand visuals. In other words, it let's you answer the following questions:
-        <br>
-        <br>
-        <ol>
-          <li>I know which <b>major</b> that I want to go for, but I'm not sure which <b>college</b> is right for me...</li>
-          <li>I know which <b>college</b> I want to attend, but I'm not sure which <b>major</b> is right for me...</li>
-        </ol>
-      </div>
+  <div>
+    <div class="display-1 font-weight-black text-xs-left mb-3">About CaliXfer</div>
 
-      <div class="pa-4"></div>
+    <div>
+      <a href="assist.org">ASSIST</a> is a website for transfer students in California to roughly figure out what courses they
+      should take in order to transfer to their dream 4-year college from a public community college. To quote, "It is intended
+      to help students and counselors work together to establish an appropriate path toward transferring from a public California
+      community college to a public California university."
+    </div>
+    <br>
 
-      <div class="display-2 font-weight-black text-xs-center mb-3">ABOUT THE DEVELOPER</div>
-      <div class="headline text-xs-left">
-        "I am a college freshman studying for Mechatronics Engineering. I'm developing this website as part of figuring out where I want to go after community college, since at this time, mechatronics is not a well known field, and thus very few undergrad programs offered mechatronics engineering as a major. I wanted to compare other programs but assist.org doesn't provide such capabilities at the moment. I hope that whoever finds this website benefits from it by helping them take one step closer to figuring out their career."
-        <br>
-        <div class="text-xs-right"><b>- Tejas Shah</b>, creator of caliXfer</div>
-      </div>
-    </v-layout>
-  </v-container>
+    <div>
+      Although ASSIST is designed to help students with figuring out course requirements, it's not as helpful when you either
+      don't know which <b>college</b> to attend or what <b>major</b> to study, or even both. This has often resulted in students
+      taking all the required courses for one major/college, only to realize that they either don't want to pursue that
+      major/college or they didn't need to take all those courses, thus wasting time and money.
+    </div>
+    <br>
+
+    <div>
+      This is where CaliXfer comes in: it provides a way to compare between different majors and/or universities with simplistic
+      understand visuals and an easy to use interface. In other words, CaliXfer helps you in answering the following questions:
+    </div>
+    <br>
+
+    <ol>
+      <li>I know which <b>college</b> I want to attend and which <b>major</b> that I want to study, but I don't know my requirements needed to transfer...</li>
+      <li>I know which <b>college</b> I want to attend, but I'm not sure which <b>major</b> is right for me...</li>
+      <li>I know which <b>major</b> that I want to study, but I'm not sure which <b>college</b> is right for me...</li>
+      <li>I don't know which <b>college</b> and <b>major</b> to choose...</li>
+    </ol>
+    <br>
+
+    <div>
+      I hope you find this website useful and helpful as I am finding, while attending DVC as of now. It's helped me gain a
+      clearer understand of my career path and what I want to do in my life.
+    </div>
+    <br>
+
+    <div>
+      - Tejas Shah (<a href="https://github.com/tejashah88">tejashah88</a>), creator of CaliXfer
+    </div>
+  </div>
 </template>
 
 <script>
