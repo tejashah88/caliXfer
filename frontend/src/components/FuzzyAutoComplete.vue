@@ -1,57 +1,47 @@
 <template>
   <div>
     <v-autocomplete
+      v-bind="$props"
       v-model="model"
-      :items="items"
+      :items="entries"
       :loading="isLoading"
       :search-input.sync="search"
       color="deep-purple"
       hide-no-data
       hide-selected
-      :item-text="description"
-      :item-value="itemValue"
-      :label="label"
-      :placeholder="placeholder"
-      :prepend-icon="prefixIcon"
-      :append-icon="suffixIcon"
       return-object
     ></v-autocomplete>
     <v-expand-transition>
       <v-list v-if="model" class="red lighten-3">
-        <v-list-tile
+        <v-list-item
           v-for="(field, i) in fields"
           :key="i"
         >
-          <v-list-tile-content>
-            <v-list-tile-title v-text="field.value"></v-list-tile-title>
-            <v-list-tile-sub-title v-text="field.key"></v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content>
+            <v-list-item-title v-text="field.value"></v-list-item-title>
+            <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-expand-transition>
   </div>
 </template>
 
 <script>
+
+import VuetifyAutoComplete from '../../node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete';
+
 const Fuse = require('fuse.js');
 
 export default {
   name: 'FuzzyAutoComplete',
-  props: {
-    label: String,
-    description: String,
-    itemValue: String,
-    placeholder: String,
-    isLoading: Boolean,
-    prefixIcon: String,
-    suffixIcon: String
-
-  },
+  extends: VuetifyAutoComplete,
   data: () => ({
     model: null,
     search: null,
     descriptionLimit: 60,
     entries: [],
+    isLoading: false,
   }),
   computed: {
     fields () {
@@ -64,20 +54,11 @@ export default {
         };
       });
     },
-    items () {
-      return this.entries.map(entry => {
-        const Description = entry.Description.length > this.descriptionLimit
-          ? entry.Description.slice(0, this.descriptionLimit) + '...'
-          : entry.Description;
-
-        return Object.assign({}, entry, { Description });
-      });
-    }
   },
   watch: {
     search (val) {
       // Items have already been loaded
-      if (this.items.length > 0) return;
+      if (this.entries.length > 0) return;
 
       // Items have already been requested
       if (this.isLoading) return;
@@ -91,7 +72,6 @@ export default {
           const { count, entries } = data;
           this.count = count;
           this.entries = entries;
-          console.log(this.entries);
         })
         .catch(err => {
           console.log(err);
