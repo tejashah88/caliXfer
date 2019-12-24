@@ -192,5 +192,5 @@ if __name__ == "__main__":
     schools = api.fetch_institutions()
     api.fetch_agreement_options_by_school(114)
     # print(api.fetch_categories_of_agreements(114, 141, 67))
-    print(api.fetch_agreements_by_category(114, 141, 67, 'dept'))
+    print(api.fetch_agreements_by_category(114, 141, 67, 'major'))
     # print(api.download_report_text(13739252))
