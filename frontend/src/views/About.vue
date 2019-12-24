@@ -11,7 +11,7 @@
     <br>
 
     <div>
-      Although ASSIST is designed to help students with figuring out course requirements, it's not as helpful when you either
+      Although ASSIST is designed to help students with figuring out transfer requirements, it's not as helpful when you either
       don't know which <b>college</b> to attend or what <b>major</b> to study, or even both. This has often resulted in students
       taking all the required courses for one major/college, only to realize that they either don't want to pursue that
       major/college or they didn't need to take all those courses, thus wasting time and money.
@@ -39,7 +39,7 @@
     <br>
 
     <div>
-      - Tejas Shah (<a href="https://github.com/tejashah88">tejashah88</a>), creator of CaliXfer
+      - Tejas Shah, creator of CaliXfer
     </div>
   </div>
 </template>
