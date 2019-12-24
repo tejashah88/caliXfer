@@ -40,9 +40,9 @@
 
         <v-col>
           <HomeTile
-            title="About the project"
+            title="Explore majors and universities"
             img="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            description="Check out what this website is all about, and what you can do with it!"
+            description="I don't know which college to attend and which major to study..."
             route="about"
             max-width=400>
           </HomeTile>

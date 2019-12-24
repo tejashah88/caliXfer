@@ -9,38 +9,13 @@
   ],
   "rules": {
     "require-await": "error",
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "quotes": ["warn", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "semi": ["warn", "always"],
     "no-console": "off",
     "no-unused-vars": "warn",
-    "prefer-const": [
-      "warn",
-      {
-        "destructuring": "any",
-        "ignoreReadBeforeAssign": false
-      }
-    ],
-    "strict": [
-      "error",
-      "global"
-    ],
+    "prefer-const": ["warn", { "destructuring": "any", "ignoreReadBeforeAssign": false }],
+    "strict": ["error", "global"],
     "no-var": "error"
   },
   "parserOptions": {

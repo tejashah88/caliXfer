@@ -43,5 +43,14 @@
     "link": "/explore-universities",
     "filename": "ExploreUnis",
     "description": "Explore different universities"
+  },
+  {
+    "title": "Explore Both",
+    "abbr-title": "both",
+    "id": "explore-both",
+    "icon": "help",
+    "link": "/explore-both",
+    "filename": "ExploreBoth",
+    "description": "Explore between majors and universities"
   }
 ]
