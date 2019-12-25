@@ -1,82 +1,77 @@
 <template>
-  <div>
-    <v-autocomplete
-      v-bind="$props"
-      v-model="model"
-      :items="entries"
-      :loading="isLoading"
-      :search-input.sync="search"
-      color="deep-purple"
-      hide-no-data
-      hide-selected
-      return-object
-    ></v-autocomplete>
-    <v-expand-transition>
-      <v-list v-if="model" class="red lighten-3">
-        <v-list-item
-          v-for="(field, i) in fields"
-          :key="i"
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="field.value"></v-list-item-title>
-            <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-expand-transition>
-  </div>
+  <v-autocomplete
+    v-bind="$props"
+    :items="results"
+    :loading="isLoading"
+    :search-input.sync="search"
+    :no-filter="true"
+    :disabled="notReady"
+    color="deep-purple"
+    hide-no-data
+    hide-selected
+    :value="model"
+    @input="onInput"
+    @update:search-input="onSelect"
+    return-object
+  ></v-autocomplete>
 </template>
 
 <script>
-
 import VuetifyAutoComplete from '../../node_modules/vuetify/lib/components/VAutocomplete/VAutocomplete';
-
 const Fuse = require('fuse.js');
 
 export default {
   name: 'FuzzyAutoComplete',
   extends: VuetifyAutoComplete,
+  props: {
+    fetchData: { type: Function, default: () => [] },
+    fuseOptions: Object,
+  },
   data: () => ({
-    model: null,
     search: null,
-    descriptionLimit: 60,
-    entries: [],
+    results: [],
     isLoading: false,
+    notReady: false,
+    selected: false,
+    model: null
   }),
-  computed: {
-    fields () {
-      if (!this.model) return [];
-
-      return Object.keys(this.model).map(key => {
-        return {
-          key,
-          value: this.model[key] || 'n/a'
-        };
-      });
+  methods: {
+    onInput (val) {
+      if (this.selected) {
+        this.$emit('input', val);
+        this.selected = false;
+      }
     },
+    onSelect() {
+      this.selected = true;
+    }
+  },
+  asyncComputed: {
+    rawResults: {
+      get() {
+        return this.fetchData();
+      },
+      default: undefined,
+    }
   },
   watch: {
+    rawResults (val) {
+      this.isLoading = !val;
+      this.notReady = this.isLoading;
+    },
     search (val) {
-      // Items have already been loaded
-      if (this.entries.length > 0) return;
+      if (!val) return;
 
-      // Items have already been requested
-      if (this.isLoading) return;
+      if (!this.rawResults) {
+        this.results = [];
+        return;
+      }
 
-      this.isLoading = true;
-
-      // Lazily load input items
-      fetch('https://api.publicapis.org/entries')
-        .then(res => res.json())
-        .then(data => {
-          const { count, entries } = data;
-          this.count = count;
-          this.entries = entries;
-        })
-        .catch(err => {
-          console.log(err);
-        })
-        .finally(() => (this.isLoading = false));
+      if (this.fuseOptions) {
+        const fuse = new Fuse(this.rawResults, this.fuseOptions);
+        this.results = fuse.search(val);
+      } else
+        this.results = this.rawResults;
     }
   }
 };
