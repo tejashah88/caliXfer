@@ -4,7 +4,7 @@ import os
 
 from tika import parser
 
-from scraper_utils import resilient_get, download_file, clean_str
+from .scraper_utils import resilient_get, download_file, clean_str
 
 class AssistAPI:
     """
@@ -13,9 +13,10 @@ class AssistAPI:
     RAW_JSON_PATH = './json-dump/raw'
     CLEAN_JSON_PATH = './json-dump/clean'
 
-    def __init__(self, dump_json=False, save_reports=True):
+    def __init__(self, online_only=False, dump_json=False, save_reports=True):
         self.dump_json = dump_json
         self.save_reports = save_reports
+        self.online_only = online_only
 
         if self.dump_json:
             os.makedirs(self.RAW_JSON_PATH, exist_ok=True)
@@ -49,7 +50,8 @@ class AssistAPI:
         return self._read_json(f'{self.CLEAN_JSON_PATH}/{filepath}')
 
     def _obtain_raw_json(self, filepath, url):
-        raw_json = self._read_raw_json(filepath)
+        raw_json = None if self.online_only else self._read_raw_json(filepath)
+
         if raw_json is None:
             raw_json = json.loads(resilient_get(url))
 
@@ -92,7 +94,7 @@ class AssistAPI:
                 },
                 'code': school['code'].strip(),
                 'use-legacy-report': school['prefers2016LegacyReport'],
-                'community-college': school['isCommunityCollege'],
+                'is-community-college': school['isCommunityCollege'],
             })
 
         if self.dump_json:
@@ -109,10 +111,10 @@ class AssistAPI:
         clean_options = []
         for option in raw_options:
             clean_options.append({
-                'school-id': option['institutionParentId'],
-                'school-name': option['institutionName'],
-                'school-code': option['code'],
-                'community-college': option['isCommunityCollege'],
+                'id': option['institutionParentId'],
+                'name': option['institutionName'],
+                'code': option['code'].strip(),
+                'is-community-college': option['isCommunityCollege'],
                 'sending-year-ids': option.get('sendingYearIds'),
                 'receiving-year-ids': option.get('receivingYearIds')
             })

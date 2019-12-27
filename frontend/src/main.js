@@ -8,10 +8,6 @@ import 'vuetify/src/styles/main.sass';
 import vuetify from './plugins/vuetify';
 Vue.use(Vuetify);
 
-//setup vue-async-computed
-import AsyncComputed from 'vue-async-computed';
-Vue.use(AsyncComputed);
-
 Vue.config.productionTip = false;
 
 new Vue({
