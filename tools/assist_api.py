@@ -10,8 +10,9 @@ class AssistAPI:
     """
     A wrapper class for fetching resources from assist.org's (hidden) API
     """
-    RAW_JSON_PATH = './json-dump/raw'
-    CLEAN_JSON_PATH = './json-dump/clean'
+    PARENT_DIR = os.path.dirname(__file__)
+    RAW_JSON_PATH = f'{PARENT_DIR}/json-dump/raw'
+    CLEAN_JSON_PATH = f'{PARENT_DIR}/json-dump/clean'
 
     def __init__(self, online_only=False, dump_json=False, save_reports=True):
         self.dump_json = dump_json
