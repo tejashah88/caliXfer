@@ -5,11 +5,6 @@ from flask_cors import CORS
 # import bjoern
 # import pymongo
 
-# apparently trying to import modules from the parent directory is near impossible without this hack
-import sys
-sys.path.append("..")
-
-
 from tools.assist_api import AssistAPI
 
 app = Flask(__name__)

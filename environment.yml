@@ -21,12 +21,17 @@ dependencies:
   - xz=5.2.4=h14c3975_4
   - zlib=1.2.11=h7b6447c_3
   - pip:
-    - beautifulsoup4==4.8.1
-    - bs4==0.0.1
     - chardet==3.0.4
+    - click==7.0
+    - flask==1.1.1
+    - flask-cors==3.0.8
     - idna==2.8
+    - itsdangerous==1.1.0
+    - jinja2==2.10.3
+    - markupsafe==1.1.1
     - pip==19.3.1
     - requests==2.22.0
+    - six==1.13.0
     - soupsieve==1.9.5
     - tika==1.23
     - urllib3==1.25.7
