@@ -29,7 +29,12 @@ def requests_retry_session(
     session.mount('https://', adapter)
     return session
 
-resilient_get = lambda url: requests_retry_session().get(url).content
+def resilient_get(url):
+    try:
+        return requests_retry_session().get(url).content
+    except Exception as ex:
+        print(f'Warning: GET request failed: {ex}')
+        return None
 
 # we use html5lib since other parsers will randomly cut off part of the text
 get_parsed_html = lambda url: BeautifulSoup(resilient_get(url), 'html5lib')

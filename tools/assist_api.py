@@ -53,10 +53,12 @@ class AssistAPI:
         raw_json = None if self.online_only else self._read_raw_json(filepath)
 
         if raw_json is None:
-            raw_json = json.loads(resilient_get(url))
+            data = resilient_get(url)
+            if data is not None:
+                raw_json = json.loads(data)
 
-            if self.dump_json:
-                self._dump_raw_json(raw_json, filepath)
+                if self.dump_json:
+                    self._dump_raw_json(raw_json, filepath)
 
         return raw_json
 
