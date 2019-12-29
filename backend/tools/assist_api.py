@@ -36,15 +36,20 @@ def resilient_get(url):
         print(f'Warning: GET request failed: {ex}')
         return None
 
-download_file = lambda url, filename: urllib.request.urlretrieve(url, filename)
+def download_file(url, filename):
+    return urllib.request.urlretrieve(url, filename)
 
-search_between = lambda target, start, end: re.search('{0}(.*){1}'.format(start, end), target).group(1)
-clean_str = lambda string: re.sub('\\s+', ' ', string).strip()
+def simplify_school_names(name):
+    name_map = [
+        ('California Polytechnic University,',  'Cal Poly'  ),
+        ('California State University,',        'CSU'       ),
+        ('University of California,',           'UC'        ),
+    ]
 
-simplify_school_names = lambda name: name \
-    .replace('California Polytechnic University,', 'Cal Poly') \
-    .replace('California State University,', 'CSU') \
-    .replace('University of California,', 'UC')
+    for (old_name, new_name) in name_map:
+        name = name.replace(old_name, new_name)
+
+    return name
 
 class AssistAPI:
     """

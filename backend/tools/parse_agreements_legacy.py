@@ -2,8 +2,6 @@ import re
 from pprint import PrettyPrinter
 ezprint = PrettyPrinter(indent=4).pprint
 
-from scrape_content import scrape_articulation_by_major
-
 def count_chars_for_lines(raw_txt):
     return [len(line) for line in raw_txt.splitlines()]
 
@@ -66,10 +64,6 @@ def parse_major_agreement(agreement_text):
     return finalized_blocks
 
 if __name__ == '__main__':
-    # txt = scrape_articulation_by_major('DIABLO', '16-17', 'UCB', 'EECS')
-    # txt = scrape_articulation_by_major('DIABLO', '16-17', 'CSUC', 'ENGMT')
-    # txt = scrape_articulation_by_major('SDSU', '16-17', 'CSULA', 'CE')
-
     with open('./data/dump-dvc-info/agreements/UCB/EECS.txt', 'r') as file:
         from time import time
         start = time()
