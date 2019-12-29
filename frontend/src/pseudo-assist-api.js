@@ -34,6 +34,9 @@ const AssistAPI = {
         'category_code': 'major'
       }
     }).then(res => res.data.reports);
+  },
+  fetchInstitutionsByMajor(srcSchoolId, majorName) {
+    return null;
   }
 };
 
