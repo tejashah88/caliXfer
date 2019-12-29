@@ -72,38 +72,18 @@
       </v-card>
     </v-dialog>
 
-    <v-list v-if="'startSchool' in selected" class="red lighten-3">
-      <v-list-item
-        v-for="(keyval, i) in Object.entries(selected.startSchool)"
-        :key="i*1">
-        <v-list-item-content>
-          <v-list-item-title v-text="keyval[0]"></v-list-item-title>
-          <v-list-item-subtitle v-text="keyval[1]"></v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-
-    <v-list v-if="'endSchool' in selected" class="green lighten-3">
-      <v-list-item
-        v-for="(keyval, i) in Object.entries(selected.endSchool)"
-        :key="i*100">
-        <v-list-item-content>
-          <v-list-item-title v-text="keyval[0]"></v-list-item-title>
-          <v-list-item-subtitle v-text="keyval[1]"></v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-
-    <v-list v-if="'major' in selected" class="blue lighten-3">
-      <v-list-item
-        v-for="(keyval, i) in Object.entries(selected.major)"
-        :key="i*10000">
-        <v-list-item-content>
-          <v-list-item-title v-text="keyval[0]"></v-list-item-title>
-          <v-list-item-subtitle v-text="keyval[1]"></v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+    <div v-for="(item, index) in formFields" :key="index">
+      <v-list v-if="item.name in selected" :class="[item.color, 'lighten-3']">
+        <v-list-item
+          v-for="(keyval, i) in Object.entries(selected[item.name])"
+          :key="i*10**index">
+          <v-list-item-content>
+            <v-list-item-title v-text="keyval[0]"></v-list-item-title>
+            <v-list-item-subtitle v-text="keyval[1]"></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </div>
 
     {{ selected }}
   </div>
@@ -121,6 +101,24 @@ export default {
   data: () => ({
     selected: {},
     AssistAPI: MemoizedAssistAPI,
+    formFields: [
+      {
+        name: 'startSchool',
+        color: 'red'
+      },
+      {
+        name: 'endSchool',
+        color: 'green'
+      },
+      {
+        name: 'major',
+        color: 'blue'
+      },
+      {
+        name: 'year',
+        color: 'yellow'
+      },
+    ],
     filled: 0,
     dialog: false,
   }),
