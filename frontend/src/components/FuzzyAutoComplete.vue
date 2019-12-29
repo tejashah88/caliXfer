@@ -6,9 +6,10 @@
     :search-input.sync="search"
     no-filter
     hide-no-data
-    hide-selected
     :value="model"
-    @input="onInput"
+    @change="onChange"
+    :chips="multiple"
+    :deletable-chips="multiple"
     return-object>
   </v-autocomplete>
 </template>
@@ -22,7 +23,7 @@ const defaultFuseOptions = {
   threshold: 0.6,
   location: 0,
   distance: 100,
-  maxPatternLength: 32,
+  maxPatternLength: 64,
   minMatchCharLength: 1,
 };
 
@@ -41,19 +42,16 @@ export default {
   },
   data: () => ({
     search: null,
-    selected: false,
     isLoading: false,
     rawResults: null,
     results: [],
     model: null
   }),
   methods: {
-    onInput (val) {
-      if (!this.selected) {
-        this.$emit('input', val);
-        this.$emit('input-selected');
-        this.selected = true;
-      }
+    onChange (val) {
+      this.search = '';
+      this.$emit('input', val);
+      this.$emit('input-selected');
     },
     fetchRawResults(forceInvalidate = false) {
       if ((forceInvalidate || this.rawResults == null) && !this.isLoading) {
@@ -70,20 +68,19 @@ export default {
           this.isLoading = false;
         }
       }
-    }
+    },
   },
   watch: {
     search (val) {
-      this.selected = false;
-
       if (!val) return;
 
       if (!this.rawResults) {
         this.fetchRawResults();
         this.results = [];
       } else {
+        const selectedItems = this.value instanceof Array ? this.value : [];
         const fuse = new Fuse(this.rawResults, this.mergedFuseOptions);
-        this.results = fuse.search(val);
+        this.results = [...fuse.search(val), ...selectedItems];
       }
     }
   }
