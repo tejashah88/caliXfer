@@ -43,7 +43,7 @@ download_file = lambda url, filename: urllib.request.urlretrieve(url, filename) 
 search_between = lambda target, start, end: re.search('{0}(.*){1}'.format(start, end), target).group(1)
 clean_str = lambda string: re.sub('\\s+', ' ', string).strip()
 
-simplify_names = lambda name: name \
+simplify_school_names = lambda name: name \
     .replace('California Polytechnic University,', 'Cal Poly') \
     .replace('California State University,', 'CSU') \
     .replace('University of California,', 'UC')

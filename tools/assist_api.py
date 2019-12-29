@@ -4,7 +4,7 @@ import os
 
 from tika import parser
 
-from .scraper_utils import resilient_get, download_file, clean_str
+from .scraper_utils import resilient_get, download_file, clean_str, simplify_school_names
 
 class AssistAPI:
     """
@@ -92,8 +92,8 @@ class AssistAPI:
             clean_schools.append({
                 'id': school['id'],
                 'names': {
-                    'current': school['names'][0]['name'],
-                    'alternative': [{'name': alt_name['name'], 'from-year': alt_name['fromYear']} for alt_name in school['names'][1:]]
+                    'current': simplify_school_names(school['names'][0]['name']),
+                    'alternative': [{'name': simplify_school_names(alt_name['name']), 'from-year': alt_name['fromYear']} for alt_name in school['names'][1:]]
                 },
                 'code': school['code'].strip(),
                 'use-legacy-report': school['prefers2016LegacyReport'],
@@ -115,7 +115,7 @@ class AssistAPI:
         for option in raw_options:
             clean_options.append({
                 'id': option['institutionParentId'],
-                'name': option['institutionName'],
+                'name': simplify_school_names(option['institutionName']),
                 'code': option['code'].strip(),
                 'is-community-college': option['isCommunityCollege'],
                 'sending-year-ids': option.get('sendingYearIds'),
