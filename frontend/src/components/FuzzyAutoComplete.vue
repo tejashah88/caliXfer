@@ -4,15 +4,13 @@
     :items="results"
     :loading="isLoading"
     :search-input.sync="search"
-    :no-filter="true"
-    color="deep-purple"
+    no-filter
     hide-no-data
     hide-selected
     :value="model"
     @input="onInput"
-    @update:search-input="onSelect"
-    return-object
-  ></v-autocomplete>
+    return-object>
+  </v-autocomplete>
 </template>
 
 <script>
@@ -33,11 +31,12 @@ export default {
   extends: VuetifyAutoComplete,
   props: {
     fetchData: { type: Function, required: true },
-    fuseOptions: { type: Object },
+    fuseOptions: { type: Object, default: () => {} },
+    extraKeys: { type: Array, default: () => [] }
   },
   computed: {
     mergedFuseOptions() {
-      return { ...defaultFuseOptions, ...{ keys: [this.itemText] }, ...this.fuseOptions };
+      return { ...defaultFuseOptions, ...{ keys: [this.itemText, ...this.extraKeys] }, ...this.fuseOptions };
     }
   },
   data: () => ({
@@ -50,13 +49,11 @@ export default {
   }),
   methods: {
     onInput (val) {
-      if (this.selected) {
+      if (!this.selected) {
         this.$emit('input', val);
-        this.selected = false;
+        this.$emit('input-selected');
+        this.selected = true;
       }
-    },
-    onSelect() {
-      this.selected = true;
     },
     fetchRawResults(forceInvalidate = false) {
       if ((forceInvalidate || this.rawResults == null) && !this.isLoading) {
@@ -77,6 +74,8 @@ export default {
   },
   watch: {
     search (val) {
+      this.selected = false;
+
       if (!val) return;
 
       if (!this.rawResults) {
