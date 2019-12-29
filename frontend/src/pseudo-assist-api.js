@@ -25,7 +25,7 @@ const AssistAPI = {
       }
     }).then(res => res.data);
   },
-  fetchMajor(srcSchoolId, dstSchoolId, yearId = 67) {
+  fetchMajors(srcSchoolId, dstSchoolId, yearId = 67) {
     return api.get('/fetch-agreements-by-category', {
       params: {
         'src_school_id': srcSchoolId,

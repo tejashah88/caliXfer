@@ -31,8 +31,7 @@
       color="deep-purple"
       placeholder="What major are you planning to study?"
       item-text="name"
-      item-value="id"
-      :fetch-data="() => this.AssistAPI.fetchMajor(selected.startSchool.id, selected.endSchool.id, 67)"
+      :fetch-data="() => this.AssistAPI.fetchMajors(selected.startSchool.id, selected.endSchool.id, 67)"
       multiple
       clearable
       @input-selected="filled |= 4">

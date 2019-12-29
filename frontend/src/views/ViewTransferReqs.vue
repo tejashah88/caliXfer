@@ -31,7 +31,7 @@
       color="deep-purple"
       placeholder="What major are you planning to study?"
       item-text="name"
-      :fetch-data="() => this.AssistAPI.fetchMajor(selected.startSchool.id, selected.endSchool.id, 67)"
+      :fetch-data="() => this.AssistAPI.fetchMajors(selected.startSchool.id, selected.endSchool.id, 67)"
       @input-selected="filled |= 4">
     </fuzzy-auto-complete>
 
