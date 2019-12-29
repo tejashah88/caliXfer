@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>View Transfer Requirements</h1>
-    <FuzzyAutoComplete
+    <outdated-agreement-warning/>
+
+    <fuzzy-auto-complete
       v-model="selected.startSchool"
       label="Starting school"
       color="deep-purple"
@@ -9,9 +11,9 @@
       item-text="names.current"
       :fetch-data="this.AssistAPI.fetchSourceInstitutions"
       @input-selected="filled |= 1">
-    </FuzzyAutoComplete>
+    </fuzzy-auto-complete>
 
-    <FuzzyAutoComplete
+    <fuzzy-auto-complete
       v-model="selected.endSchool"
       :disabled="!(selected.startSchool)"
       label="Destination school"
@@ -20,9 +22,9 @@
       item-text="name"
       :fetch-data="() => this.AssistAPI.fetchTargetInstitutions(selected.startSchool.id)"
       @input-selected="filled |= 2">
-    </FuzzyAutoComplete>
+    </fuzzy-auto-complete>
 
-    <FuzzyAutoComplete
+    <fuzzy-auto-complete
       v-model="selected.major"
       :disabled="!(selected.startSchool && selected.endSchool)"
       label="Major"
@@ -31,23 +33,13 @@
       item-text="name"
       :fetch-data="() => this.AssistAPI.fetchMajor(selected.startSchool.id, selected.endSchool.id, 67)"
       @input-selected="filled |= 4">
-    </FuzzyAutoComplete>
-
-    <FuzzyAutoComplete
-      v-model="selected.year"
-      label="Year"
-      color="deep-purple"
-      placeholder="What year agreements do you want to see?"
-      item-text="fall-year"
-      :fetch-data="() => this.AssistAPI.fetchYears()"
-      @input-selected="filled |= 8">
-    </FuzzyAutoComplete>
+    </fuzzy-auto-complete>
 
     <v-btn
       large
       block
       color="deep-purple lighten-1"
-      :disabled="dialog || !!(filled ^ 15)"
+      :disabled="dialog || !!(filled ^ 7)"
       :loading="dialog"
       @click="dialog = true"
       class="white--text">
@@ -91,12 +83,14 @@
 
 <script>
 import FuzzyAutoComplete from '@/components/FuzzyAutoComplete';
+import OutdatedAgreementWarning from '@/components/OutdatedAgreementWarning';
 import MemoizedAssistAPI from '@/pseudo-assist-api.js';
 
 export default {
   name: 'ViewTransferReqs',
   components: {
-    FuzzyAutoComplete
+    FuzzyAutoComplete,
+    OutdatedAgreementWarning
   },
   data: () => ({
     selected: {},
@@ -126,7 +120,7 @@ export default {
     dialog (val) {
       if (!val) return;
 
-      setTimeout(() => (this.dialog = false), 4000);
+      setTimeout(() => (this.dialog = false), 3000);
     },
   }
 };
