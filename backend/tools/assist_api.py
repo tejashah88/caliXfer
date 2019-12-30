@@ -58,6 +58,7 @@ class AssistAPI:
     PARENT_DIR = os.path.dirname(__file__)
     RAW_JSON_PATH = f'{PARENT_DIR}/json-dump/raw'
     CLEAN_JSON_PATH = f'{PARENT_DIR}/json-dump/clean'
+    REPORTS_PATH = f'{PARENT_DIR}/reports'
 
     def __init__(self, online_only=False, dump_json=False, save_reports=True):
         self.dump_json = dump_json
@@ -126,8 +127,8 @@ class AssistAPI:
 
         return clean_years
 
-    def fetch_institutions(self):
-        FILEPATH = 'institutions.json'
+    def fetch_source_schools(self):
+        FILEPATH = 'src-institutions.json'
         URL = 'https://assist.org/api/institutions'
 
         raw_schools = self._obtain_raw_json(FILEPATH, URL)
@@ -150,15 +151,15 @@ class AssistAPI:
 
         return clean_schools
 
-    def fetch_agreement_options_by_school(self, start_school_id):
-        FILEPATH = f'agreement-options/{start_school_id}/options.json'
+    def fetch_destination_schools(self, start_school_id):
+        FILEPATH = f'dst-institutions/{start_school_id}.json'
         URL = f'https://assist.org/api/institutions/{start_school_id}/agreements'
 
-        raw_options = self._obtain_raw_json(FILEPATH, URL)
+        raw_schools = self._obtain_raw_json(FILEPATH, URL)
 
-        clean_options = []
-        for option in raw_options:
-            clean_options.append({
+        clean_schools = []
+        for option in raw_schools:
+            clean_schools.append({
                 'id': option['institutionParentId'],
                 'name': simplify_school_names(option['institutionName']),
                 'code': option['code'].strip(),
@@ -168,12 +169,12 @@ class AssistAPI:
             })
 
         if self.dump_json:
-            self._dump_clean_json(clean_options, FILEPATH)
+            self._dump_clean_json(clean_schools, FILEPATH)
 
-        return clean_options
+        return clean_schools
 
     def fetch_categories_of_agreements(self, start_school_id, end_school_id, year_id):
-        FILEPATH = f'categories/{start_school_id}/{end_school_id}/{year_id}/categories.json'
+        FILEPATH = f'categories/{start_school_id}/{end_school_id}/{year_id}.json'
         URL = f'https://assist.org/api/agreements/categories?sendingInstitutionId={start_school_id}&receivingInstitutionId={end_school_id}&academicYearId={year_id}'
 
         raw_categories = self._obtain_raw_json(FILEPATH, URL)
@@ -193,7 +194,7 @@ class AssistAPI:
 
 
     def fetch_agreements_by_category(self, start_school_id, end_school_id, year_id, category_code):
-        FILEPATH = f'categories/{start_school_id}/{end_school_id}/{year_id}/{category_code}/agreements.json'
+        FILEPATH = f'agreements/{start_school_id}/{end_school_id}/{year_id}/{category_code}.json'
         URL = f'https://assist.org/api/agreements?sendingInstitutionId={start_school_id}&receivingInstitutionId={end_school_id}&academicYearId={year_id}&categoryCode={category_code}'
 
         raw_agreements = self._obtain_raw_json(FILEPATH, URL)
@@ -219,12 +220,12 @@ class AssistAPI:
 
 
     def download_report_text(self, agreement_id):
-        FILEPATH = f'reports/{agreement_id}/report.pdf'
+        FILEPATH = f'{self.REPORTS_PATH}/{agreement_id}.pdf'
         URL = f'https://assist.org/api/artifacts/{agreement_id}'
 
         download_file(URL, FILEPATH)
 
-        parsed_pdf = parser.from_file(filename)
+        parsed_pdf = parser.from_file(FILEPATH)
         raw_text = parsed_pdf['content']
 
         clean_text = ""

@@ -17,12 +17,12 @@ def fetch_years():
 
 @app.route('/origin-institutions')
 def fetch_src_institutions():
-    return jsonify(api.fetch_institutions())
+    return jsonify(api.fetch_source_schools())
 
 @app.route('/dest-institutions')
 def fetch_dst_institutions():
     src_school_id = request.args.get('src_school_id')
-    return jsonify(api.fetch_agreement_options_by_school(src_school_id))
+    return jsonify(api.fetch_destination_schools(src_school_id))
 
 @app.route('/fetch-agreements-by-category')
 def fetch_agreements_by_category():
