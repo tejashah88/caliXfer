@@ -36,8 +36,20 @@ def resilient_get(url):
         print(f'Warning: GET request failed: {ex}')
         return None
 
-def download_file(url, filename):
-    return urllib.request.urlretrieve(url, filename)
+def download_file(url, filename, retries_left=5):
+    if retries_left != 0:
+        if not os.path.isfile(filename):
+            parent_folder = os.path.dirname(filename)
+            os.makedirs(parent_folder, exist_ok=True)
+            try:
+                urllib.request.urlretrieve(url, filename)
+            except KeyboardInterrupt:
+                raise
+            except:
+                print(f'ALERT: Retrying {url}...')
+                download_file(url, filename, retries_left - 1)
+    else:
+        print(f'ALERT: Aborting {url}!')
 
 def simplify_school_names(name):
     name_map = [
@@ -219,11 +231,14 @@ class AssistAPI:
         return clean_agreements
 
 
-    def download_report_text(self, agreement_id):
+    def download_report_text(self, agreement_id, download_only=False):
         FILEPATH = f'{self.REPORTS_PATH}/{agreement_id}.pdf'
         URL = f'https://assist.org/api/artifacts/{agreement_id}'
 
         download_file(URL, FILEPATH)
+
+        if download_only:
+            return ''
 
         parsed_pdf = parser.from_file(FILEPATH)
         raw_text = parsed_pdf['content']
