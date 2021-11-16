@@ -5,6 +5,8 @@ from flask_cors import CORS
 # import bjoern
 # import pymongo
 
+from tika import tika
+
 from tools.assist_api import AssistAPI
 
 app = Flask(__name__)
@@ -31,6 +33,11 @@ def fetch_agreements_by_category():
     year_id = request.args.get('year_id')
     category_code = request.args.get('category_code')
     return jsonify(api.fetch_agreements_by_category(src_school_id, dst_school_id, year_id, category_code))
+
+@app.route('/fetch-agreement')
+def fetch_agreement_text():
+    agreement_id = request.args.get('agreement_id')
+    return api.download_report_text(agreement_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -29,7 +29,7 @@
       :disabled="!(selected.startSchool && selected.endSchool)"
       label="Major"
       color="deep-purple"
-      placeholder="What major are you planning to study?"
+      placeholder="What majors do you want to explore?"
       item-text="name"
       :fetch-data="() => this.AssistAPI.fetchMajors(selected.startSchool.id, selected.endSchool.id, 67)"
       multiple

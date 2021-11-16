@@ -29,7 +29,7 @@
       :disabled="!(selected.startSchool)"
       label="Destination school"
       color="deep-purple"
-      placeholder="Where do you want to transfer to?"
+      placeholder="What colleges do you want to explore?"
       item-text="name"
       multiple
       clearable

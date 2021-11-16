@@ -7,7 +7,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-from tika import parser
+from tika import tika, parser
 
 # "Borrowed" from https://www.peterbe.com/plog/best-practice-with-retries-with-requests
 def requests_retry_session(
@@ -80,6 +80,8 @@ class AssistAPI:
         if self.dump_json:
             os.makedirs(self.RAW_JSON_PATH, exist_ok=True)
             os.makedirs(self.CLEAN_JSON_PATH, exist_ok=True)
+
+        tika.checkTikaServer()
 
     def _dump_json(self, content, full_filepath):
         parent_folder = os.path.dirname(full_filepath)
